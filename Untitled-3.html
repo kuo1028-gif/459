@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>給你的話</title>
+    <style>
+        body {
+            background-color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: "Microsoft JhengHei", sans-serif;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        /* 畫面切換設定 */
+        .page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            position: absolute;
+        }
+
+        #page1 {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        #page2 {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+        }
+
+        /* 卡片樣式 */
+        .container {
+            background-color: rgba(255, 255, 255, 1);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); /* 乾淨的陰影 */
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #2c3e50;
+            font-size: 1.15rem;
+            line-height: 2;
+            letter-spacing: 1px;
+            margin: 0;
+            white-space: pre-line;
+        }
+
+        /* 修正：將提示字改為淡灰色 #A0A0A0，在白底上才看得見 */
+        .tap-hint {
+            color: #A0A0A0;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            user-select: none;
+            animation: blink 2.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 第一個畫面：原本的心裡話卡片 -->
+<div id="page1" class="page">
+    <div class="container">
+        <p>我們認識的時間並不久，也不像戀人，其
+        實你問我我真的發自內心愛過你嗎，我大
+        概率會說沒有，我記得在認識過後的幾
+        天，我不怎麼敢去找你，是你來主動找我
+        的，謝謝你，跟你玩我很開心，謝謝你出現
+        在我的世界</p>
+    </div>
+    <!-- 提示字在白底上會若隱若現的一閃一閃 -->
+    <div class="tap-hint">Tap anywhere</div>
+</div>
+
+<!-- 第二個畫面：一模一樣的卡片，裡面裝著 byebye -->
+<div id="page2" class="page">
+    <div class="container">
+        <p>byebye</p>
+    </div>
+</div>
+
+<script>
+    document.body.addEventListener('click', function() {
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+
+        if (page1.style.opacity !== "0") {
+            page1.style.opacity = "0";
+            page1.style.transform = "translateY(-20px)";
+            page1.style.pointerEvents = "none";
+
+            page2.style.opacity = "1";
+            page2.style.transform = "translateY(0)";
+            page2.style.pointerEvents = "auto";
+        }
+    });
+</script>
+
+</body>
+</html>
